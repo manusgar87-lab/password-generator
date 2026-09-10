@@ -49,11 +49,9 @@ Include uppercase letters? (y/n): y
 
 Generated Password: K7@mQ2!xLp9#Dz4$
 
-Technologies
 Java
 SecureRandom
 Scanner
 StringBuilder
 Java Collections
-License
 

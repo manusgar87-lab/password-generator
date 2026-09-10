@@ -70,7 +70,11 @@ public class PasswordGenerator{
         
         String password = generatePassword(length, includeNumbers, includeSymbols, includeLowercase, includeUppercase);
         password = shuffleString(password);
-        System.out.println("\n🔐 Generated Password: " + password);
+String strength = checkPasswordStrength(password);
+
+System.out.println("\n🔐 Generated Password: " + password);
+System.out.println("💪 Password Strength: " + strength);
+
         scanner.close();
         }
         catch (InputMismatchException e) {
@@ -140,4 +144,56 @@ public class PasswordGenerator{
         }
         return shuffled.toString();
     }
+
+
+
+    private static String checkPasswordStrength(String password){
+        int score = 0;
+        boolean includeNumbers = false;
+        boolean includeSymbols = false;
+        boolean includeLowercase = false;
+        boolean includeUppercase = false;
+
+        if (password.length() >= 8) {
+            score++;
+        }
+        if (password.length() >= 12) {
+            score++;
+        }
+        for(char c : password.toCharArray()){
+            if(Character.isDigit(c)){
+                includeNumbers = true;
+            }
+            else if(SYMBOLS.indexOf(c) >= 0){
+                includeSymbols = true;
+            }
+            else if(Character.isLowerCase(c)){
+                includeLowercase = true;
+            }
+            else if(Character.isUpperCase(c)){
+                includeUppercase = true;
+            }
+        }
+        if(includeNumbers){
+            score++;    
+        }
+        if(includeSymbols){
+            score++;    
+        }
+        if(includeLowercase){
+            score++;    
+        }
+        if(includeUppercase){
+            score++;    
+        }
+
+        return switch (score) {
+            case 0, 1, 2 -> "Weak";
+            case 3, 4 -> "Moderate";
+            case 5 -> "Strong";
+            case 6 -> "Very Strong";
+            default -> "Unknown";
+        };
+    }
 }
+
