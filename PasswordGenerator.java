@@ -70,7 +70,7 @@ public class PasswordGenerator{
         
         String password = generatePassword(length, includeNumbers, includeSymbols, includeLowercase, includeUppercase);
         password = shuffleString(password);
-        System.out.println("Generated Password: " + password);
+        System.out.println("\n🔐 Generated Password: " + password);
         scanner.close();
         }
         catch (InputMismatchException e) {
